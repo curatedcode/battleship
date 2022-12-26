@@ -19,8 +19,7 @@ const GameBoard = ()=>{
         receiveAttack (coordToCheck,currPlayer){
             let shotMissed = false
             for (let i = 0; i < this.shipCoordinates.length; i++) {
-                const currEl = this.shipCoordinates[i].coords
-                if(currEl.includes(coordToCheck)){
+                if(this.shipCoordinates[i].coords.includes(coordToCheck)){
                     currPlayer.hit(this.shipCoordinates[i].name)
                     const index = this.shipCoordinates[i].coords.indexOf(coordToCheck)
                     if(index === 0){
@@ -34,11 +33,18 @@ const GameBoard = ()=>{
                         const arrayTwo = this.shipCoordinates[i].coords.slice(index+1)
                         this.shipCoordinates[i].coords = arrayOne.concat(arrayTwo)
                     }
-                    const chunkOne = this.shipCoordinates[i].coords.slice()
-                    break
                 } else {shotMissed = true}
             }
             if (shotMissed === true){this.missedShots.push(coordToCheck)}
+        },
+        isGameOver (playerShips){
+            let sunkShips = []
+            for(let i=0; i<playerShips.allShips.length;i++){
+                if(playerShips.allShips[i].sunk){
+                    sunkShips.push(playerShips.allShips[i].name)
+                }
+            }
+            if(sunkShips.length === this.shipCoordinates.length) return true
         }
     }
 }
