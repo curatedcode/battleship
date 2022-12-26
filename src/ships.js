@@ -1,39 +1,43 @@
 
 const Ship = ()=>{
     return {
-        carrier: {
-            length: 5,
-            hitCount: 0,
-            sunk: false
-        },
-        battleship: {
-            length: 5,
-            hitCount: 0,
-            sunk: false
-        },
-        cruiser: {
-            length: 3,
-            hitCount: 0,
-            sunk: false
-        },
-        submarine: {
-            length: 3,
-            hitCount: 0,
-            sunk: false
-        },
-        destroyer: {
-            length: 2,
-            hitCount: 0,
-            sunk: false
-        },
+        allShips: [
+            {name: 'carrier', info: {
+                length: 5,
+                hitCount: 0,
+                sunk: false
+            }},
+            {name: 'battleship', info: {
+                length: 5,
+                hitCount: 0,
+                sunk: false
+            }},
+            {name: 'cruiser', info: {
+                length: 3,
+                hitCount: 0,
+                sunk: false
+            }},
+            {name: 'submarine', info: {
+                length: 3,
+                hitCount: 0,
+                sunk: false
+            }},
+            {name: 'destroyer', info: {
+                length: 2,
+                hitCount: 0,
+                sunk: false
+            }}
+        ],
         hit (ship){
-            if(ship === 'carrier') {ship = this.carrier; console.log(ship)}
-            else if (ship === 'battleship') {ship = this.battleship}
-            else if (ship === 'cruiser') {ship = this.cruiser}
-            else if (ship === 'submarine') {ship = this.submarine}
-            else if (ship === 'destroyer') {ship = this.destroyer}
-            ship.hitCount++
-            if(ship.hitCount === ship.length) console.log(ship); return this.isSunk(ship)
+            for (let i=0;i<this.allShips.length;i++){
+                if(this.allShips[i].name === ship){
+                    this.allShips[i].info.hitCount++
+                    if(this.allShips[i].info.hitCount === this.allShips[i].info.length) {
+                        return this.isSunk(this.allShips[i].info)
+                    }
+                }
+            }
+            
         },
         isSunk (ship){
             return ship.sunk = true
@@ -41,6 +45,4 @@ const Ship = ()=>{
     }
 }
 
-module.exports = {
-    Ship
-}
+module.exports = {Ship}
