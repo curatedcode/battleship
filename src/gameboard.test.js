@@ -21,6 +21,9 @@ describe('check if receiveAttack hits ship if so, remove coord and trigger hit f
         gameBoardTest.receiveAttack(44,testShip)
         expect(gameBoardTest.missedShots).toStrictEqual([44])
     })
+    test('shot taken should be in allShotsTaken array',()=>{
+        expect(gameBoardTest.allShotsTaken).toStrictEqual([44])
+    })
     test('if receiveAttack hits a ship update hitCount of relevant ship',()=>{
         gameBoardTest.receiveAttack(43,testShip)
         expect(testShip.allShips[0].info.hitCount).toBe(1)
