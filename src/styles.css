@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .board-box {
+        border: 1px solid rgb(30 41 59);
+    }
+}
