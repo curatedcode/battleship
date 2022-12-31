@@ -8,7 +8,7 @@ const Ship = ()=>{
                 sunk: false
             }},
             {name: 'battleship', info: {
-                length: 5,
+                length: 4,
                 hitCount: 0,
                 sunk: false
             }},
