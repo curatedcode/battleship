@@ -14,7 +14,7 @@ describe('place the ship then verify no other coords were modified',()=>{
     })
 })
 
-describe('check if receiveAttack hits ship if so, remove coord and trigger hit function on relevant ship',()=>{
+describe('check if receiveAttack hits ship if so, trigger hit function on relevant ship',()=>{
     const testShip = ship.Ship()
     const gameBoardTest = gameBoard.GameBoard()
     test('check if receiveAttack has hit a ship',()=>{
@@ -27,9 +27,6 @@ describe('check if receiveAttack hits ship if so, remove coord and trigger hit f
     test('if receiveAttack hits a ship update hitCount of relevant ship',()=>{
         gameBoardTest.receiveAttack(43,testShip)
         expect(testShip.allShips[0].info.hitCount).toBe(1)
-    })
-    test('verify that relevant ship coord is removed',()=>{
-        expect(gameBoardTest.shipCoordinates[0].coords).toStrictEqual([33,53,63,73])
     })
 })
 
