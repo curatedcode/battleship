@@ -98,8 +98,12 @@ function makeShipsDraggable(){
         el.addEventListener('drop',e=>{
             e.preventDefault()
             const draggedEl = document.querySelector('.dragging')
-            draggedEl.style.visibility = 'hidden'
-            lastMovedShip = draggedEl.classList[0]
+            const boxShipClass = `.board-box.${draggedEl.classList[0]}`
+            if(document.querySelector(boxShipClass)){
+                draggedEl.style.visibility = 'hidden'
+                lastMovedShip = draggedEl.classList[0]
+            }
+
         })
     })
 }
