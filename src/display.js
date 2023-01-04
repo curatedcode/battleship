@@ -1,6 +1,8 @@
 const { check } = require("prettier")
 const { Player } = require("./player")
 
+window.onresize = updateShipSizes
+
 const player = Player()
 const computer = Player()
 let lastMovedShip
@@ -113,7 +115,6 @@ function rotateShip(){
     function hasBoxBeenShifted(operation){
         for(let i=0;i<shipLocations.length;i++){
             if(shipLocations[i].classList.contains(operation)){
-                console.log(shipLocations[i])
                 return true
             }
         }
@@ -208,7 +209,6 @@ function rotateShip(){
                 }
             }
         }
-        console.log({clearLocations,rotation})
         return clearLocations
     }
     if(String(firstShipIndex)[0] === String(firstShipIndex-shipLocations.length+1)[0] && !hasBoxBeenShifted('ml') && !areBoxesAlreadyUsed('ml')){
@@ -234,18 +234,16 @@ function startGame(){
         for(let i=0;i<=player.gameBoard.shipCoordinates.length-1;i++){
             let currShip
             let shipIndexes = []
-            let ship = document.querySelectorAll(currShip)
-            if(i === 0){currShip = 'board-box.carrier'}
-            else if(i === 1) {currShip = 'board-box.battleship'}
-            else if(i === 2) {currShip = 'board-box.cruiser'}
-            else if(i === 3) {currShip = 'board-box.submarine'}
-            else if(i === 4) {currShip = 'board-box.destroyer'}
-            ship.forEach(el=>{
+            if(i === 0){currShip = '.board-box.carrier'}
+            else if(i === 1) {currShip = '.board-box.battleship'}
+            else if(i === 2) {currShip = '.board-box.cruiser'}
+            else if(i === 3) {currShip = '.board-box.submarine'}
+            else if(i === 4) {currShip = '.board-box.destroyer'}
+            document.querySelectorAll(currShip).forEach(el=>{
                 shipIndexes.push([...el.parentElement.children].indexOf(el))
             })
             player.gameBoard.shipCoordinates[i].coords = shipIndexes
         }
-        console.log(currShip,player.gameBoard.shipCoordinates)
         addPlayerShipsToBoard()
     }
 }
@@ -301,9 +299,6 @@ function checkForWinner(player,computer){
         alert('You Have Lost')
     }
 }
-
-// addEventListener()
-window.onresize = updateShipSizes
 
 module.exports = {
     showGameBoard
