@@ -30,13 +30,12 @@ const GameBoard = ()=>{
             if (shotMissed){this.missedShots.push(coordToCheck)}
         },
         isGameOver (playerShips){
-            let sunkShips = []
             for(let i=0; i<playerShips.allShips.length;i++){
-                if(playerShips.allShips[i].sunk){
-                    sunkShips.push(playerShips.allShips[i].name)
+                if(!playerShips.allShips[i].info.sunk){
+                    return false
                 }
             }
-            if(sunkShips.length === this.shipCoordinates.length) return true
+            return true
         }
     }
 }
