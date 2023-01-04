@@ -66,7 +66,7 @@ function makeShipsDraggable(){
             for(let i=2;i<shipLength;i++){
                 positions.push(positions[positions.length-1]+10)
             }
-            if(parent.children[positions[0]].classList.length <=1 && parent.children[positions[positions.length-1]].classList.length <=1 ){
+            if(positions.every((index)=>parent.children[index].classList.length < 2)){
                 positions.forEach(element=>{
                     parent.children[element].style.backgroundColor = 'rgb(176,0,0)'
                     parent.children[element].classList.add(shipName)
