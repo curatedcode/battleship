@@ -24,11 +24,11 @@ function updateShipSizes(){
     children.forEach(element => {
         element.style.width = `${boardBoxSize}px`
     });
-    document.querySelector('.carrier').style.height = `${boardBoxSize*5}px`
-    document.querySelector('.battleship').style.height = `${boardBoxSize*4}px`
-    document.querySelector('.cruiser').style.height = `${boardBoxSize*3}px`
-    document.querySelector('.submarine').style.height = `${boardBoxSize*3}px`
-    document.getElementsByClassName('destroyer')[0].style.height = `${boardBoxSize*2}px`
+    document.querySelector('.ships-container > .carrier').style.height = `${boardBoxSize*5}px`
+    document.querySelector('.ships-container > .battleship').style.height = `${boardBoxSize*4}px`
+    document.querySelector('.ships-container > .cruiser').style.height = `${boardBoxSize*3}px`
+    document.querySelector('.ships-container > .submarine').style.height = `${boardBoxSize*3}px`
+    document.querySelector('.ships-container > .destroyer').style.height = `${boardBoxSize*2}px`
     makeShipsDraggable()
 }
 
