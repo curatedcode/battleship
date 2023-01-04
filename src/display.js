@@ -262,23 +262,23 @@ function addPlayerShipsToBoard(){
 }
 
 function addAttackEventListeners(){
-    const attackBoard = document.querySelector('.attack-board')
-    for(let i=0;i<attackBoard.childElementCount;i++){
-        const box = attackBoard.children[i]
-        box.addEventListener('click',()=>{
+    document.querySelector('.attack-container').classList.toggle('hidden')
+    const attackBoardBoxes = document.querySelectorAll('.attack-board > .board-box')
+    attackBoardBoxes.forEach(el =>{
+        el.addEventListener('click',()=>{
             const attackBoard = document.querySelector('.attack-container')
-            player.sendAttack([...box.parentElement.children].indexOf(box),computer.gameBoard,computer.ships)
-            attackBoard.style.visibility = 'hidden'
+            player.sendAttack([...el.parentElement.children].indexOf(el),computer.gameBoard,computer.ships)
+            attackBoard.classList.toggle('hidden')
             showPlacedShots(document.querySelector('.attack-board'),computer)
             showPlacedShots(document.querySelector('.enemy-board'),computer)
             setTimeout(()=>{
                 computer.sendAttack(computer.computer.randomCoord(),player.gameBoard,player.ships)
                 showPlacedShots(document.querySelector('.player-board'),player)
-                checkForWinner(player,computer)
             },500)
-            setTimeout(()=>{attackBoard.style.visibility = 'visible'},1500)
+            checkForWinner()
+            setTimeout(()=>{attackBoard.classList.toggle('hidden')},1500)
         })
-    }
+    })
 }
 
 function showPlacedShots(gameBoard,player){
@@ -292,11 +292,11 @@ function showPlacedShots(gameBoard,player){
     }
 }
 
-function checkForWinner(player,computer){
+function checkForWinner(){
     if(player.gameBoard.isGameOver(player.ships)){
-        alert('You Have Won')
-    } else if (computer.gameBoard.isGameOver(computer.ships)){
         alert('You Have Lost')
+    } else if (computer.gameBoard.isGameOver(computer.ships)){
+        alert('You Have Won')
     }
 }
 
