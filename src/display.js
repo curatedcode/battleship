@@ -305,6 +305,8 @@ function addAttackEventListeners(){
                 targetIcon.classList.toggle('hidden')
                 attackBoard.classList.toggle('hidden')
             },4000)
+            el.classList.remove('hover:bg-slate-700','hover:cursor-pointer')
+            el.replaceWith(el.cloneNode(true))
         })
     })
 }
