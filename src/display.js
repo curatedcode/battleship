@@ -1,4 +1,3 @@
-const { check } = require("prettier")
 const { Player } = require("./player")
 
 window.onresize = updateShipSizes
@@ -255,10 +254,8 @@ function startGame(){
 function addPlayerShipsToBoard(){
     for(let i=0;i<player.gameBoard.shipCoordinates.length;i++){
         const currShip = player.gameBoard.shipCoordinates[i]
-        const colors = ['black','white','blue','red','purple']
-        const currColor = colors[i]
         for(let g=0;g<currShip.coords.length;g++){
-            document.querySelector('.player-board').children[currShip.coords[g]].style.backgroundColor = `${currColor}`
+            document.querySelector('.player-board').children[currShip.coords[g]].style.backgroundColor = 'rgb(50, 32, 60)'
         }
     }
     document.querySelector('.enemy-board').classList.toggle('hidden')
@@ -268,19 +265,46 @@ function addPlayerShipsToBoard(){
 function addAttackEventListeners(){
     document.querySelector('.attack-container').classList.toggle('hidden')
     const attackBoardBoxes = document.querySelectorAll('.attack-board > .board-box')
+
+    function putIconOnBoard(index,attacker){
+        const targetIcon = document.querySelector('.target-icon')
+        const playerBoard = document.querySelector('.player-board')
+        const enemyBoard = document.querySelector('.enemy-board')
+        let boundingLeft
+        let boundingTop
+        if(attacker === 'player'){
+            boundingLeft = Math.floor(enemyBoard.children[index].getBoundingClientRect().left+window.scrollX)
+            boundingTop = Math.floor(enemyBoard.children[index].getBoundingClientRect().top+window.scrollY)
+        } else if (attacker === 'computer'){
+            boundingLeft = Math.floor(playerBoard.children[index].getBoundingClientRect().left+window.scrollX)
+            boundingTop = Math.floor(playerBoard.children[index].getBoundingClientRect().top+window.scrollY)
+        }
+        targetIcon.src = require('./images/crosshair.svg')
+        targetIcon.setAttribute('style',`width:${playerBoard.children[0].offsetWidth}px; color: rgb(255,0,0); position: fixed; left:${boundingLeft}px; top:${boundingTop}px; scale: 1.5;`)
+    }
     attackBoardBoxes.forEach(el =>{
         el.addEventListener('click',()=>{
             const attackBoard = document.querySelector('.attack-container')
-            player.sendAttack([...el.parentElement.children].indexOf(el),computer.gameBoard,computer.ships)
+            const targetIcon = document.querySelector('.target-icon')
+            const index = [...el.parentElement.children].indexOf(el)
+            putIconOnBoard(index,'player')
+            targetIcon.classList.toggle('hidden')
             attackBoard.classList.toggle('hidden')
-            showPlacedShots(document.querySelector('.attack-board'),computer)
-            showPlacedShots(document.querySelector('.enemy-board'),computer)
+            player.sendAttack(index,computer.gameBoard,computer.ships)
             setTimeout(()=>{
                 computer.sendAttack(computer.computer.randomCoord(),player.gameBoard,player.ships)
+                showPlacedShots(document.querySelector('.attack-board'),computer)
+                showPlacedShots(document.querySelector('.enemy-board'),computer)
+                putIconOnBoard(player.gameBoard.allShotsTaken[player.gameBoard.allShotsTaken.length-1], 'computer')
+            },2000)
+            setTimeout(()=>{
                 showPlacedShots(document.querySelector('.player-board'),player)
-            },500)
+            },3000)
             checkForWinner()
-            setTimeout(()=>{attackBoard.classList.toggle('hidden')},1500)
+            setTimeout(()=>{
+                targetIcon.classList.toggle('hidden')
+                attackBoard.classList.toggle('hidden')
+            },4000)
         })
     })
 }
