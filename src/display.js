@@ -49,51 +49,9 @@ function makeShipsDraggable(){
     containers.forEach(el =>{
         el.addEventListener('dragover',e=>{
             e.preventDefault()
+            highlightBoxes(e)
         })
-        el.addEventListener('dragenter',()=>{
-            const index = [...el.parentElement.children].indexOf(el)
-            const parent = el.parentElement
-            const shipName = document.querySelector('.dragging').classList[0]
-            let shipLength
-            let positions = [index-10,index]
-
-            if(shipName === 'carrier'){ shipLength = 5 }
-            else if(shipName === 'battleship'){ shipLength = 4 }
-            else if(shipName === 'cruiser'){ shipLength = 3 }
-            else if(shipName === 'submarine'){ shipLength = 3 } 
-
-            for(let i=2;i<shipLength;i++){
-                positions.push(positions[positions.length-1]+10)
-            }
-            if(positions.every((index)=>parent.children[index].classList.length < 2)){
-                positions.forEach(element=>{
-                    parent.children[element].style.backgroundColor = 'rgb(176,0,0)'
-                    parent.children[element].classList.add(shipName)
-                })
-            }
-        })
-        el.addEventListener('dragleave',()=>{
-            const index = [...el.parentElement.children].indexOf(el)
-            const parent = el.parentElement
-            const shipName = document.querySelector('.dragging').classList[0]
-            let shipLength
-            let positions = [index-10,index]
-
-            if(shipName === 'carrier'){ shipLength = 5 }
-            else if(shipName === 'battleship'){ shipLength = 4 }
-            else if(shipName === 'cruiser'){ shipLength = 3 }
-            else if(shipName === 'submarine'){ shipLength = 3 } 
-
-            for(let i=2;i<shipLength;i++){
-                positions.push(positions[positions.length-1]+10)
-            }
-            if(parent.children[positions[0]].classList[1] === shipName && parent.children[positions[positions.length-1]].classList[1] === shipName ){
-                positions.forEach(element=>{
-                    parent.children[element].removeAttribute('style')
-                    parent.children[element].classList.remove(shipName)
-                })
-            }
-        })
+        el.addEventListener('dragleave',removeBoxHighlights)
         el.addEventListener('drop',e=>{
             e.preventDefault()
             const draggedEl = document.querySelector('.dragging')
@@ -104,6 +62,45 @@ function makeShipsDraggable(){
             }
 
         })
+    })
+}
+
+function highlightBoxes(e){
+    const draggedEl = document.querySelector('.dragging')
+    const shipName = draggedEl.classList[0]
+    const parent = document.querySelector('.player-board')
+    const index = [...parent.children].indexOf(e.target)
+    const ships = player.ships.allShips
+    let shipLength
+    ships.forEach(obj =>{
+        if(obj.name === shipName) return shipLength = obj.info.length
+    })
+    let positions = [index]
+    for(let i=1; i<shipLength; i++){
+        const higherPosition = positions[positions.length-1]+10
+        const lowerPosition = positions[0]-10
+        if(higherPosition < 100){
+            positions.push(higherPosition)
+        } else if (lowerPosition > 0){
+            positions.unshift(lowerPosition)
+        }
+    }
+    if(positions.every(index => parent.children[index].classList.length < 2)){
+        positions.forEach(element=>{
+            parent.children[element].style.backgroundColor = 'rgb(176,0,0)'
+            parent.children[element].classList.add(shipName)
+        })
+    }
+}
+
+function removeBoxHighlights(e){
+    const draggedEl = document.querySelector('.dragging')
+    const shipName = draggedEl.classList[0]
+    document.querySelectorAll('.board-box').forEach(box =>{
+        if(box.classList.contains(shipName)){
+            box.removeAttribute('style')
+            box.classList.remove(shipName)
+        }
     })
 }
 
