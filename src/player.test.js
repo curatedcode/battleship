@@ -13,3 +13,16 @@ test('generate a random move thats has not been played before',()=>{
     expect(computerTest.computer.usedMoves).toStrictEqual([randomCoord])
 })
 
+test('generate random coordinates for each computer ship',()=>{
+    const computerTest = playerModule.Player()
+    const computerGameBoard = computerTest.gameBoard
+    const oldShipCoordinates = JSON.stringify(computerTest.gameBoard.shipCoordinates)
+    computerTest.computer.fillShipCoords(computerGameBoard)
+    const newShipCoordinates = JSON.stringify(computerGameBoard.shipCoordinates)
+    let coordsMatching = true
+
+    if(newShipCoordinates !== oldShipCoordinates){
+        coordsMatching = false
+    }
+    expect(coordsMatching).toBe(false)
+})
