@@ -36,8 +36,11 @@ function makeShipsDraggable(){
     const containers = document.querySelectorAll('.player-board > .board-box')
 
     draggables.forEach(el =>{
-        el.addEventListener('dragstart',()=>{
+        el.addEventListener('dragstart',e=>{
             el.style.opacity = '.5'
+            const heightThreeQuarter = Math.round((el.getBoundingClientRect().height)/3.5)
+            const middleWidth = Math.round((el.getBoundingClientRect().width)/2)
+            e.dataTransfer.setDragImage(e.path[0],middleWidth,heightThreeQuarter)
             el.classList.add('dragging')
         })
         el.addEventListener('dragend',()=>{
