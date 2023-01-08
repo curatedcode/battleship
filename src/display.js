@@ -7,7 +7,7 @@ const computer = Player()
 let lastMovedShip
 
 function showGameBoard(){
-    document.querySelector('.play-container').style.visibility = 'hidden'
+    document.querySelector('.play-container').style.display = 'none'
     document.querySelector('.action-buttons').classList.toggle('hidden')
     document.querySelector('.player-board').classList.remove('hidden')
     document.querySelector('.ships-container').classList.toggle('hidden')
