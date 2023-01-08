@@ -87,7 +87,7 @@ function highlightBoxes(e){
     }
     if(positions.every(index => parent.children[index].classList.length < 2)){
         positions.forEach(element=>{
-            parent.children[element].style.backgroundColor = 'rgb(176,0,0)'
+            parent.children[element].style.backgroundColor = 'rgb(30 41 59)'
             parent.children[element].classList.add(shipName)
         })
     }
@@ -110,7 +110,7 @@ function rotateShip(){
     const firstShipIndex = [...shipLocations[0].parentElement.children].indexOf(shipLocations[0])
     const lastShipIndex = [...shipLocations[shipLocations.length-1].parentElement.children].indexOf(shipLocations[shipLocations.length-1])
     const parent = shipLocations[0].parentElement
-    const color = 'rgb(176,0,0)'
+    const color = 'rgb(30 41 59)'
 
     function hasBoxBeenShifted(operation){
         for(let i=0;i<shipLocations.length;i++){
