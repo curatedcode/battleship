@@ -34,7 +34,7 @@ test('verify gameBoard detects when all ships have been sunk',()=>{
     const testShip = ship.Ship()
     const gameBoardTest = gameBoard.GameBoard()
     for(let i=0;i<testShip.allShips.length;i++){
-        testShip.allShips[i].sunk = true
+        testShip.allShips[i].info.sunk = true
     }
     expect(gameBoardTest.isGameOver(testShip)).toBe(true)
 })
