@@ -13,13 +13,13 @@ const Player = ()=>{
                     this.usedMoves.push(coord)
                     return coord
                 }
-                return this.randomCoord(Math.floor(Math.random()*100)+1)
+                return this.randomCoord(Math.floor(Math.random()*100))
             },
             fillShipCoords (playerGameBoard){
                 let allCoords = []
                 function randomShipCoords(shipLength){
                     const axis = Math.floor(Math.random()*2)
-                    const firstCoord = Math.floor(Math.random()*100)+1
+                    const firstCoord = Math.floor(Math.random()*100)
                     let generatedCoords = []
                     if(allCoords.includes(firstCoord)){
                         return randomShipCoords(shipLength)
