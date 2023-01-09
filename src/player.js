@@ -8,12 +8,13 @@ const Player = ()=>{
         ships: shipModule.Ship(),
         computer: {
             usedMoves: [],
-            randomCoord (coord = 0){
-                if(coord !== 0 && coord !== this.usedMoves.includes(coord)){
+            randomCoord (coord = Math.floor(Math.random()*100)){
+                if(coord > -1 && coord < 100 && !this.usedMoves.includes(coord)){
                     this.usedMoves.push(coord)
                     return coord
+                } else {
+                    return this.randomCoord(Math.floor(Math.random()*100))
                 }
-                return this.randomCoord(Math.floor(Math.random()*100))
             },
             fillShipCoords (playerGameBoard){
                 let allCoords = []
