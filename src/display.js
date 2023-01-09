@@ -296,7 +296,26 @@ function addAttackEventListeners(){
             attackBoard.classList.toggle('hidden')
             player.sendAttack(index,computer.gameBoard,computer.ships)
             setTimeout(()=>{
-                computer.sendAttack(computer.computer.randomCoord(),player.gameBoard,player.ships)
+                if(lastShotHit() && player.gameBoard.allShotsTaken.length > 0){
+                    const lastShot = player.gameBoard.allShotsTaken[player.gameBoard.allShotsTaken.length-1]
+                    let nextShot = lastShot+10
+                    if(nextShot > 100){
+                        nextShot = lastShot-10
+                    } else if (nextShot < 100 && Math.random() > .5){
+                        if(String(lastShot)[0] === String(lastShot+1)[0]){
+                            nextShot = lastShot+1
+                        } else if (String(lastShot)[0] === String(lastShot-1)[0]){
+                            nextShot = lastShot-1
+                        }
+                    }
+                    if(!computer.computer.usedMoves.includes(nextShot)){
+                        computer.sendAttack(nextShot,player.gameBoard,player.ships)
+                    } else {
+                        computer.sendAttack(computer.computer.randomCoord(),player.gameBoard,player.ships)
+                    }
+                } else {
+                    computer.sendAttack(computer.computer.randomCoord(),player.gameBoard,player.ships)
+                }
                 showPlacedShots(document.querySelector('.attack-board'),computer)
                 showPlacedShots(document.querySelector('.enemy-board'),computer)
                 putIconOnBoard(player.gameBoard.allShotsTaken[player.gameBoard.allShotsTaken.length-1], 'computer')
@@ -313,6 +332,12 @@ function addAttackEventListeners(){
             el.replaceWith(el.cloneNode(true))
         })
     })
+    function lastShotHit(){
+        const allShotsTaken = player.gameBoard.allShotsTaken
+        const missedShots = player.gameBoard.missedShots
+        if(missedShots.includes(allShotsTaken[allShotsTaken.length-1])){ return false }
+        else { return true }
+    }
 }
 
 function showPlacedShots(gameBoard,player){
