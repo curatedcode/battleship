@@ -252,12 +252,16 @@ function startGame(){
 }
 
 function addPlayerShipsToBoard(){
-    for(let i=0;i<player.gameBoard.shipCoordinates.length;i++){
-        const currShip = player.gameBoard.shipCoordinates[i]
-        for(let g=0;g<currShip.coords.length;g++){
-            document.querySelector('.player-board').children[currShip.coords[g]].style.backgroundColor = 'rgb(50, 32, 60)'
-        }
-    }
+    player.gameBoard.shipCoordinates.forEach(ship =>{
+        ship.coords.forEach(coord =>{
+            document.querySelector('.player-board').children[coord].style.backgroundColor = 'rgb(50,32,60)'
+        })
+    })
+    computer.gameBoard.shipCoordinates.forEach(ship =>{
+        ship.coords.forEach(coord =>{
+            document.querySelector('.enemy-board').children[coord].classList.add(ship.name)
+        })
+    })
     document.querySelector('.enemy-board').classList.toggle('hidden')
     addAttackEventListeners()
 }
