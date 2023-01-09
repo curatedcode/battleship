@@ -14,6 +14,7 @@ const config = {
     path: path.resolve(__dirname, "dist"),
   },
   devServer: {
+    static: './index.html',
     open: true,
     host: "localhost",
   },
