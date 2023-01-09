@@ -299,7 +299,7 @@ function addAttackEventListeners(){
                 if(lastShotHit() && player.gameBoard.allShotsTaken.length > 0){
                     const lastShot = player.gameBoard.allShotsTaken[player.gameBoard.allShotsTaken.length-1]
                     let nextShot = lastShot+10
-                    if(nextShot > 100){
+                    if(nextShot > 99){
                         nextShot = lastShot-10
                     } else if (nextShot < 100 && Math.random() > .5){
                         if(String(lastShot)[0] === String(lastShot+1)[0]){
@@ -349,15 +349,24 @@ function showPlacedShots(gameBoard,player){
             gameBoard.children[currChildIndex].style.backgroundColor = 'rgb(30,41,59)'
         }
     }
-    player.ships.allShips.forEach(ship=>{
-        updateColorIfSunk(ship,'player')
-    })
-    computer.ships.allShips.forEach(ship=>{
-        updateColorIfSunk(ship,'enemy')
-    })
-    function updateColorIfSunk(ship,player){
-        if(ship.info.sunk){
-            console.log(ship)
+
+    if(player === computer){
+        computer.ships.allShips.forEach(ship=>{
+            if(ship.info.sunk){
+                updateColor(ship,'enemy')
+            }
+        })
+    } else if(player !== computer){
+        player.ships.allShips.forEach(ship=>{
+            if(ship.info.sunk === 'h'){
+                updateColor(ship,'player')
+            }
+        })
+    }
+
+    function updateColor(ship,player){
+        if(ship.info.sunk === true){
+            console.log(ship,player)
             document.querySelectorAll(`.${player}-board > .board-box.${ship.name}`).forEach(el =>{
                 el.classList.add('transition-all')
                 el.style.backgroundColor = 'rgba(128,5,0,0.5)'
