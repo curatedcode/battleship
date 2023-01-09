@@ -252,6 +252,7 @@ function startGame(){
 }
 
 function addPlayerShipsToBoard(){
+    computer.computer.fillShipCoords(computer.gameBoard)
     player.gameBoard.shipCoordinates.forEach(ship =>{
         ship.coords.forEach(coord =>{
             document.querySelector('.player-board').children[coord].style.backgroundColor = 'rgb(50,32,60)'
@@ -341,14 +342,14 @@ function addAttackEventListeners(){
 }
 
 function showPlacedShots(gameBoard,player){
-    for(let i=0;i<gameBoard.childElementCount;i++){
-        const currChildIndex = [...gameBoard.children].indexOf(gameBoard.children[i])
-        if(player.gameBoard.allShotsTaken.includes(currChildIndex) && !player.gameBoard.missedShots.includes(currChildIndex)){
-            gameBoard.children[currChildIndex].style.backgroundColor = 'rgb(176,0,0)'
-        } else if (player.gameBoard.missedShots.includes(currChildIndex)){
-            gameBoard.children[currChildIndex].style.backgroundColor = 'rgb(30,41,59)'
+    player.gameBoard.allShotsTaken.forEach(coord =>{
+        const gameBoardChild = gameBoard.children[coord]
+        if(player.gameBoard.missedShots.includes(coord)){
+           gameBoardChild.style.backgroundColor = 'rgb(30,41,59)'
+        } else {
+            gameBoardChild.style.backgroundColor = 'rgb(176,0,0'
         }
-    }
+    })
 
     if(player === computer){
         computer.ships.allShips.forEach(ship=>{
@@ -358,15 +359,14 @@ function showPlacedShots(gameBoard,player){
         })
     } else if(player !== computer){
         player.ships.allShips.forEach(ship=>{
-            if(ship.info.sunk === 'h'){
+            if(ship.info.sunk){
                 updateColor(ship,'player')
             }
         })
     }
 
     function updateColor(ship,player){
-        if(ship.info.sunk === true){
-            console.log(ship,player)
+        if(ship.info.sunk){
             document.querySelectorAll(`.${player}-board > .board-box.${ship.name}`).forEach(el =>{
                 el.classList.add('transition-all')
                 el.style.backgroundColor = 'rgba(128,5,0,0.5)'
