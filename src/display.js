@@ -324,6 +324,21 @@ function showPlacedShots(gameBoard,player){
             gameBoard.children[currChildIndex].style.backgroundColor = 'rgb(30,41,59)'
         }
     }
+    player.ships.allShips.forEach(ship=>{
+        updateColorIfSunk(ship,'player')
+    })
+    computer.ships.allShips.forEach(ship=>{
+        updateColorIfSunk(ship,'enemy')
+    })
+    function updateColorIfSunk(ship,player){
+        if(ship.info.sunk){
+            console.log(ship)
+            document.querySelectorAll(`.${player}-board > .board-box.${ship.name}`).forEach(el =>{
+                el.classList.add('transition-all')
+                el.style.backgroundColor = 'rgba(128,5,0,0.5)'
+            })
+        }
+    }
 }
 
 function checkForWinner(){
