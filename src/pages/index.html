@@ -8,9 +8,6 @@
     <title>Battleship</title>
 </head>
 <body class="bg-gradient-to-b from-black to-slate-800 text-gray-300 h-full bg-fixed">
-    <header>
-        <h1 class="text-emerald-400 font-bold text-3xl">Battleship</h1>
-    </header>
     <div class="win-box hidden flex items-center justify-center gap-4 fixed w-full h-full backdrop-blur-lg z-10">
         <div class="win-message fixed bottom-8 left-1/2 -translate-x-1/2 z-20 bg-red-900 text-center p-4 rounded-full whitespace-nowrap md:text-2xl">Congrats You Won!</div>
         <img class="animate-bounce w-2/3" src="https://media1.tenor.com/images/91065c1381a6c9f30bdd2a46ea5dd3bd/tenor.gif?itemid=16279130" alt="dancing cat">
@@ -19,8 +16,9 @@
         <div class="lose-message fixed bottom-8 left-1/2 -translate-x-1/2 z-20 bg-red-900 text-center p-4 rounded-full whitespace-nowrap md:text-2xl">We All Can't Be Winners...</div>
         <img class="animate-bounce w-2/3" src="https://media.giphy.com/media/qUijFdShYXmZq/giphy.gif" alt="dancing cat">
     </div>
-    <div class="play-container absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <button class="py-1 px-4 text-xl bg-slate-400 border-slate-400 rounded-md select-none md:text-4xl md:py-2 md:px-6 text-slate-800" name="play">Play</button>
+    <div class="play-container absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 grid grid-cols-3 place-items-center gap-10 select-none">
+        <h1 class="title-text font-bold col-span-3 bg-clip-text bg-gradient-to-br to-pink-500 from-emerald-400 text-transparent text-6xl">Battleship</h1>
+        <button class="py-1 px-6 text-xl bg-emerald-700 rounded-full col-start-2 col-end-2 whitespace-nowrap font-extrabold hover:shadow-md hover:shadow-emerald-300 transition-shadow" name="play">Start Game</button>
     </div>
     <main class="mt-4 flex justify-center items-center z-0">
         <div class="game-container flex flex-col gap-8 items-center justify-center w-11/12 lg:w-2/3 sm:flex-row">
@@ -347,7 +345,7 @@
         </div>
     </main>
     <footer class="absolute bottom-0 w-full flex justify-center">
-        <a class="text-lg" href="instructions.html">Instructions</a> 
+        <a class="text-lg hover:text-emerald-300" href="instructions.html">Instructions</a> 
     </footer>
 </body>
 </html>
