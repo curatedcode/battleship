@@ -1,5 +1,9 @@
 const { Player } = require("./player")
 
+document.querySelector('.play-container > button').addEventListener('click',()=>{
+    showGameBoard()
+})
+
 window.onresize = updateShipSizes
 
 const player = Player()
@@ -381,8 +385,4 @@ function checkForWinner(){
     } else if (computer.gameBoard.isGameOver(computer.ships)){
         document.querySelector('.win-box').classList.remove('hidden')
     }
-}
-
-module.exports = {
-    showGameBoard
 }
