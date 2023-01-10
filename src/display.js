@@ -15,6 +15,7 @@ function showGameBoard(){
     document.querySelector('.action-buttons').classList.toggle('hidden')
     document.querySelector('.player-board').classList.remove('hidden')
     document.querySelector('.ships-container').classList.toggle('hidden')
+    document.querySelector('footer').classList.add('hidden')
     document.querySelector('.fa-rotate').addEventListener('click',rotateShip)
     document.querySelector('.fa-circle-play').addEventListener('click',startGame)
     updateShipSizes()
