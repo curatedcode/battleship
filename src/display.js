@@ -19,6 +19,7 @@ function showGameBoard(){
     document.querySelector('.fa-rotate').addEventListener('click',rotateShip)
     document.querySelector('.fa-circle-play').addEventListener('click',startGame)
     updateShipSizes()
+    setTimeout(updateShipSizes,1)
 }
 
 function updateShipSizes(){
