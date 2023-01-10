@@ -235,6 +235,7 @@ function startGame(){
     if(document.querySelector('.board-box.carrier') && document.querySelector('.board-box.battleship') && document.querySelector('.board-box.submarine') && document.querySelector('.board-box.cruiser') && document.querySelector('.board-box.destroyer')) {
         document.querySelector('.action-buttons').classList.toggle('hidden')
         document.querySelector('.ships-container').classList.toggle('hidden')
+        document.querySelector('.game-container').classList.remove('md\:w-4\/5','lg\:w-3\/5')
         storeShipLocations()
     } else {
         alert('Please Place All Ships!')
