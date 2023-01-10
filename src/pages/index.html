@@ -21,7 +21,7 @@
         <button class="py-1 px-6 text-xl bg-emerald-700 rounded-full col-start-2 col-end-2 whitespace-nowrap font-extrabold hover:shadow-md hover:shadow-emerald-300 transition-shadow" name="play">Start Game</button>
     </div>
     <main class="mt-4 flex justify-center items-center z-0">
-        <div class="game-container flex flex-col gap-8 items-center justify-center w-11/12 lg:w-2/3 sm:flex-row">
+        <div class="game-container flex flex-col gap-8 items-center justify-center w-11/12 sm:flex-row sm:absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
             <div class="action-buttons grid grid-cols-2 sm:grid-cols-1 gap-7 text-5xl md:text-6xl hidden">
                 <i class="fa-solid fa-rotate hover:text-slate-600 hover:cursor-pointer"></i>
                 <i class="fa-regular fa-circle-play hover:text-slate-600 hover:cursor-pointer"></i>
@@ -135,7 +135,7 @@
                 <div class="submarine bg-emerald-800 hover:bg-emerald-700 hover:cursor-pointer transition-colors" draggable="true"></div>
                 <div class="destroyer bg-emerald-800 hover:bg-emerald-700 hover:cursor-pointer transition-colors" draggable="true"></div>
             </div>
-            <div class="enemy-board grid grid-cols-10 bg-gradient-to-br from-black to-slate-900 border-2 border-pink-600 aspect-square w-11/12 hidden">
+            <div class="enemy-board grid grid-cols-10 bg-gradient-to-bl from-black to-slate-900 border-2 border-pink-600 aspect-square w-11/12 hidden">
                 <div class="board-box"></div>
                 <div class="board-box"></div>
                 <div class="board-box"></div>
