@@ -9,19 +9,29 @@ const isProduction = process.env.NODE_ENV == "production";
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
-  entry: "./src/index.js",
+  entry: {
+    index: './src/index.js',
+    instructions: './src/instructions.js',
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
   },
   devServer: {
-    static: './index.html',
+    static: './src/pages/*.html',
     open: true,
     host: "localhost",
   },
   devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html",
+      instructions: 'index.html',
+      template: "./src/pages/index.html",
+      chunks: ['index'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'instructions.html',
+      template: './src/pages/instructions.html',
+      chunks: ['instructions']
     }),
 
     new MiniCssExtractPlugin(),
