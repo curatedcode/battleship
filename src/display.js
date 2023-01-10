@@ -383,8 +383,12 @@ function showPlacedShots(gameBoard,player){
 
 function checkForWinner(){
     if(player.gameBoard.isGameOver(player.ships)){
-        document.querySelector('.lose-box').classList.remove('hidden')
+        setTimeout(() => {
+            document.querySelector('.lose-box').classList.remove('hidden')
+        }, 3500);
     } else if (computer.gameBoard.isGameOver(computer.ships)){
-        document.querySelector('.win-box').classList.remove('hidden')
+        setTimeout(() => {
+            document.querySelector('.win-box').classList.remove('hidden')
+        }, 2500);
     }
 }
