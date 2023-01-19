@@ -34,16 +34,7 @@ gh repo clone curatedcode/battleship
 npm install
 ```
 
-5. You will also need webpack and webpack-cli installed on your machine. [Webpack documentation](https://webpack.js.org/guides/installation).
-
-```
-npm install --save-dev webpack
-
-#To use the webpack commands
-npm install --save-dev webpack-cli
-```
-
-6. Finally build and serve the repo
+5. Finally build and serve the repo
 
 ```
 npm run serve
