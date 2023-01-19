@@ -28,10 +28,10 @@ gh repo clone curatedcode/battleship
 
 3. ```cd``` into the directory of your local clone.
 
-4. Install the MiniCssExtractPlugin using the command below 
+4. Install the required packages
 
 ``` 
-npm install --save-dev mini-css-extract-plugin
+npm install
 ```
 
 5. You will also need webpack and webpack-cli installed on your machine. [Webpack documentation](https://webpack.js.org/guides/installation).
