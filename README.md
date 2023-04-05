@@ -45,9 +45,3 @@ npm run serve
 ![Title Screen](https://i.postimg.cc/ZRLVBZFr/1-title-screen.png)
 ![Strategy Panel](https://i.postimg.cc/pTyvV2F6/2-strategy-panel.png)
 ![Attack Stage](https://i.postimg.cc/sfwT3j2z/3-attack-stage.png)
-
-
-
-### License
-
-This project is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
